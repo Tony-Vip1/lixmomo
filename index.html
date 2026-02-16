@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlixMoMo - Descargar APK</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 18px 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+        .features {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        .features h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .features ul {
+            list-style: none;
+            color: #666;
+            font-size: 0.95em;
+        }
+        .features li {
+            margin: 10px 0;
+        }
+        .features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .download-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 FlixMoMo</h1>
+        <p>Películas, Series y Fútbol <strong>GRATIS</strong></p>
+        <p>Descarga nuestra app y disfruta de miles de contenidos sin anuncios.</p>
+        <a class="download-button" href="FlixMoMo.apk" download>
+            ⬇️ Descargar APK Ahora
+        </a>
+        <div class="features">
+            <h3>¿Por qué elegirnos?</h3>
+            <ul>
+                <li>Miles de películas y series</li>
+                <li>Fútbol en vivo 24/7</li>
+                <li>Sin anuncios molestos</li>
+                <li>Descarga y mira offline</li>
+                <li>Compatible con Android</li>
+                <li>Soporte técnico 24/7</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
