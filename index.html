@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlixMoMo - Descargar APK</title>
     <style>
-        /* --- ESTILO BASE --- */
+        /* --- ESTILO BASE DARK & GOLD --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -29,8 +29,7 @@
         }
 
         h1 { color: #ffcc00; font-size: 2.5em; margin-bottom: 5px; letter-spacing: -1px; }
-        .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 15px; opacity: 0.9; }
-        .main-desc { color: #bbb; font-size: 1.05em; margin-bottom: 25px; line-height: 1.5; }
+        .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 20px; opacity: 0.9; }
 
         /* BOTÓN DESCARGA CON RELOJ */
         .download-button {
@@ -43,194 +42,110 @@
             font-weight: 800;
             color: #000;
             background: #ffcc00;
+            border: none;
             border-radius: 12px;
             text-decoration: none;
             width: 100%;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             transition: 0.3s;
             text-transform: uppercase;
             box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+            cursor: pointer;
         }
         .download-button:hover { background: #fff; transform: scale(1.02); }
-        
-        .timer-box {
-            font-size: 0.85em;
-            background: rgba(0,0,0,0.1);
-            padding: 2px 10px;
-            border-radius: 5px;
-            margin-top: 5px;
-            color: #d40000; /* Rojo para el reloj */
-            font-family: monospace;
-        }
+        .timer-box { font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 10px; border-radius: 5px; margin-top: 5px; color: #d40000; font-family: monospace; }
 
-        /* LISTA DE CARACTERÍSTICAS */
-        .features {
-            margin-bottom: 30px;
-            text-align: left;
-            padding: 0 10px;
-        }
-        .features h3 { color: #ffcc00; font-size: 1em; margin-bottom: 15px; text-transform: uppercase; text-align: center; }
-        .features ul { list-style: none; }
-        .features li { 
-            margin: 10px 0; 
-            color: #ddd; 
-            display: flex; 
-            align-items: center; 
-            font-size: 0.95em; 
-        }
-        .features li:before {
-            content: "✓";
-            background: #ffcc00; color: #000;
-            width: 18px; height: 18px; border-radius: 50%;
-            display: inline-flex; align-items: center; justify-content: center;
-            margin-right: 12px; font-weight: bold; font-size: 10px; flex-shrink: 0;
-        }
-
-        /* ANUNCIO DE ELY */
-        .spam-ad {
-            background: linear-gradient(145deg, #1a1a1a, #000);
-            border: 1px solid #333;
+        /* ESTILO COMÚN ANUNCIOS SPAM */
+        .ad-box {
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 18px;
+            margin-bottom: 15px;
             text-decoration: none;
             display: block;
             position: relative;
             transition: 0.4s;
-        }
-        .spam-ad:hover { border-color: #ff0055; background: #111; }
-        
-        .live-badge {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: #ff0055;
-            color: white;
-            font-size: 0.7em;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            animation: pulse-red 1s infinite;
+            text-align: left;
+            border: 1px solid #333;
         }
 
-        .spam-ad h4 { color: #fff; font-size: 1.2em; margin-bottom: 10px; text-align: left; }
-        .spam-ad p { color: #ccc; font-size: 0.95em; line-height: 1.4; text-align: left; }
-        .ely-name { color: #ff0055; font-weight: 800; font-size: 1.2em; }
+        /* ANUNCIO CRYPTO (VERDE) */
+        .ad-crypto { background: linear-gradient(145deg, #0a1a0f, #000); }
+        .ad-crypto:hover { border-color: #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+        .crypto-title { color: #00ff88; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .badge-green { background: #00ff88; color: black; position: absolute; top: 10px; right: 15px; font-size: 0.7em; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
 
-        /* FRASE FINAL CURRADA */
-        .final-hook {
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 1px solid #222;
-        }
-        .final-hook h2 {
-            font-size: 1.3em;
-            font-style: italic;
-            background: linear-gradient(90deg, #ffcc00, #ff0055, #00eeff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            font-weight: 900;
-        }
-        .final-hook p { font-size: 0.8em; color: #555; letter-spacing: 1px; text-transform: uppercase; }
+        /* ANUNCIO ELY (ROJO) */
+        .ad-ely { background: linear-gradient(145deg, #1a0a0e, #000); }
+        .ad-ely:hover { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
+        .ely-name { color: #ff0055; font-weight: 800; }
+        .badge-red { background: #ff0055; color: white; position: absolute; top: 10px; right: 15px; font-size: 0.7em; padding: 2px 8px; border-radius: 4px; font-weight: bold; animation: pulse 1s infinite; }
 
-        @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        /* FRASE FINAL */
+        .final-hook { margin-top: 30px; padding-top: 20px; border-top: 1px solid #222; }
+        .final-hook h2 { font-size: 1.3em; font-style: italic; background: linear-gradient(90deg, #ffcc00, #ff0055, #00eeff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>📱 FlixMoMo</h1>
-        <div class="tagline">EL PODER DEL ENTRETENIMIENTO TOTAL</div>
+        <div class="tagline">ENTRETENIMIENTO SIN LÍMITES</div>
         
-        <p class="main-desc" id="description">Disfruta de miles de contenidos premium sin anuncios y en la palma de tu mano.</p>
-
-        <a class="download-button" id="btn-container" href="FlixMoMo.apk" download>
-            <span id="btn-text">🚀 OBTENER PREMIUM GRATUITO</span>
-            <div class="timer-box">EXPIRA EN: <span id="countdown">03:30</span></div>
+        <a class="download-button" href="FlixMoMo.apk" download>
+            <span>🚀 OBTENER PREMIUM GRATUITO</span>
+            <div class="timer-box">OFERTA TERMINA EN: <span id="countdown">03:30</span></div>
         </a>
 
-        <div class="features">
-            <h3 id="feat-title">¿Por qué elegirnos?</h3>
-            <ul id="feat-list">
-                <li>Miles de películas y series en HD</li>
-                <li>Fútbol en vivo 24/7 sin cortes</li>
-                <li>Descarga y mira donde quieras</li>
-                <li>Soporte técnico dedicado</li>
-            </ul>
-        </div>
+        <a href="https://bit.ly/4cE3LHe" class="ad-box ad-crypto" target="_blank">
+            <span class="badge-green">RECLAMA YA</span>
+            <span class="crypto-title">💰 AIRDROP DETECTADO</span>
+            <p style="color: #ddd; font-size: 0.9em;">¡No te quedes fuera! Recoge tus **Tokens GRATIS** antes de que sea tarde. El dinero inteligente ya está aquí.</p>
+            <div style="margin-top: 10px; color: #00ff88; font-weight: bold; font-size: 0.85em;">⚡ TOCA AQUÍ PARA RECOGER TUS CRYPTOS ⚡</div>
+        </a>
 
-        <a href="https://t.me/onlychatsvip" class="spam-ad" target="_blank">
-            <span class="live-badge">EN VIVO AHORA</span>
-            <h4>¿Aburrido de ver solo pelis?</h4>
-            <p>Descubre el lado más salvaje de <span class="ely-name">Ely</span>. Sin censura, sin esperas y con ganas de cumplir tus fantasías más explosivas.</p>
-            <div style="margin-top: 15px; color: #00eeff; font-weight: bold; font-size: 0.9em; text-align: left;">
-                👉 TOCA AQUÍ PARA HABLAR CON ELLA 👈
-            </div>
+        <a href="https://bit.ly/4c20Tnv" class="ad-box ad-ely" target="_blank">
+            <span class="badge-red">EN VIVO</span>
+            <h4 style="color: #fff; margin-bottom: 5px;">¿Aburrido de ver solo pelis?</h4>
+            <p style="color: #ccc; font-size: 0.9em;">Descubre el lado más salvaje de <span class="ely-name">Ely</span>. Sin censura y lista para cumplir tus fantasías más locas.</p>
+            <div style="margin-top: 10px; color: #00eeff; font-weight: bold; font-size: 0.85em;">👉 CHATEA CON ELLA AHORA 👈</div>
         </a>
 
         <div class="final-hook">
             <h2>No te limites a mirar... vive la experiencia completa.</h2>
-            <p>Tu próxima obsesión comienza con un clic.</p>
         </div>
     </div>
 
     <script>
-        // Lógica de la Cuenta Atrás Aleatoria
+        // Lógica de la Cuenta Atrás (3m 30s aprox aleatorio)
         function startTimer() {
-            // Tiempo aleatorio entre 3m 15s y 4m 00s para que parezca real
             let time = Math.floor(Math.random() * (240 - 195 + 1) + 195); 
             const display = document.querySelector('#countdown');
-            
-            const timer = setInterval(function () {
+            setInterval(function () {
                 let minutes = parseInt(time / 60, 10);
                 let seconds = parseInt(time % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = minutes + ":" + seconds;
-
-                if (--time < 0) {
-                    time = 210; // Reinicia si llega a cero para que siempre haya urgencia
-                }
+                display.textContent = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--time < 0) time = 210;
             }, 1000);
         }
 
-        // Traducción para Polonia (Mantenida)
-        const translations = {
-            pl: {
-                description: "Ciesz się treściami premium bez reklam.",
-                btnText: "🚀 ODBIERZ DARMOWE PREMIUM",
-                featTitle: "Dlaczego my?",
-                featList: ["Filmy i seriale HD", "Piłka nożna 24/7", "Pobieraj i oglądaj", "Pomoc techniczna"]
-            }
-        };
-
-        async function init() {
-            startTimer(); // Iniciar reloj
-
+        // Detección Polonia para el botón
+        async function detectPl() {
             const browserLang = navigator.language.split('-')[0];
-            if (browserLang === 'pl') {
-                const t = translations.pl;
-                document.getElementById('description').innerText = t.description;
-                document.getElementById('btn-text').innerText = t.btnText;
-                document.getElementById('feat-title').innerText = t.featTitle;
-                const listItems = document.querySelectorAll('#feat-list li');
-                t.featList.forEach((text, index) => { if(listItems[index]) listItems[index].innerText = text; });
-            }
-            
-            // Verificación por IP para Polonia
+            const btn = document.querySelector('.download-button span');
+            if (browserLang === 'pl') { btn.innerText = "🚀 ODBIERZ DARMOWE PREMIUM"; }
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
-                if (data.country_code === 'PL' && browserLang !== 'pl') {
-                    document.getElementById('btn-text').innerText = "🚀 ODBIERZ DARMOWE PREMIUM";
-                }
+                if (data.country_code === 'PL') btn.innerText = "🚀 ODBIERZ DARMOWE PREMIUM";
             } catch (e) {}
         }
 
-        window.onload = init;
+        window.onload = function() {
+            startTimer();
+            detectPl();
+        };
     </script>
 
 </body>
