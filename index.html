@@ -23,13 +23,15 @@
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
             max-width: 500px;
             width: 100%;
-            padding: 50px 30px;
+            padding: 40px 30px;
             text-align: center;
             border: 1px solid #333;
         }
         h1 { color: #ffcc00; font-size: 2.8em; margin-bottom: 10px; }
         .tagline { color: #ffcc00; font-weight: bold; font-size: 1.2em; margin-bottom: 20px; text-transform: uppercase; }
-        p { color: #bbb; font-size: 1.05em; margin-bottom: 35px; line-height: 1.5; }
+        p { color: #bbb; font-size: 1.05em; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* BOTÓN DESCARGA */
         .download-button {
             display: inline-block;
             padding: 20px 40px;
@@ -43,78 +45,114 @@
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .download-button:hover { transform: translateY(-3px); background: #ffe066; }
-        .features { margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; text-align: left; }
-        .features h3 { color: #ffcc00; margin-bottom: 20px; font-size: 1.1em; text-align: center; }
+        .download-button:hover { transform: translateY(-3px); background: #ffe066; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3); }
+
+        /* CARTEL PUBLICIDAD SPAM LLAMATIVO */
+        .spam-ad {
+            background: linear-gradient(45deg, #222, #000);
+            border: 2px dashed #ff0055; /* Borde rojo neón */
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            animation: pulse-border 1.5s infinite;
+            text-decoration: none;
+            display: block;
+        }
+        @keyframes pulse-border {
+            0% { border-color: #ff0055; box-shadow: 0 0 5px #ff0055; }
+            50% { border-color: #00eeff; box-shadow: 0 0 15px #00eeff; }
+            100% { border-color: #ff0055; box-shadow: 0 0 5px #ff0055; }
+        }
+        .spam-ad h4 {
+            color: #ff0055;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+        .spam-ad p {
+            color: #fff;
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        .spam-ad .highlight {
+            color: #00eeff;
+            display: block;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        .live-icon {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: red;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+        /* LISTA FEATURES */
+        .features { margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; text-align: left; }
+        .features h3 { color: #ffcc00; margin-bottom: 15px; font-size: 1.1em; text-align: center; }
         .features ul { list-style: none; }
-        .features li { margin: 12px 0; color: #ddd; display: flex; align-items: center; font-size: 0.95em; }
+        .features li { margin: 10px 0; color: #ddd; display: flex; align-items: center; font-size: 0.9em; }
         .features li:before {
             content: "✓";
-            background: #ffcc00;
-            color: #000;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-weight: bold;
-            font-size: 12px;
+            background: #ffcc00; color: #000;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-right: 10px; font-weight: bold; font-size: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 id="main-title">📱 FlixMoMo</h1>
-        <div class="tagline" id="sub-title">Películas, Series y Fútbol <strong>GRATIS</strong></div>
-        <p id="description">Descarga nuestra app y disfruta de miles de contenidos sin anuncios y en alta calidad.</p>
+        <h1>📱 FlixMoMo</h1>
+        <div class="tagline">Películas, Series y Fútbol <strong>GRATIS</strong></div>
         
         <a class="download-button" id="btn-text" href="FlixMoMo.apk" download>
             ⬇️ DESCARGAR APK AHORA
         </a>
 
+        <a href="https://t.me/onlychatsvip" class="spam-ad" target="_blank">
+            <span class="live-icon"></span>
+            <h4>¡CONEXIÓN EN VIVO!</h4>
+            <p>Conoce a <strong style="color: #ffcc00;">Ely</strong>, la chica explosiva 💥</p>
+            <p class="highlight">¡Lista para hablar contigo ahora mismo!</p>
+            <small style="color: #666; font-size: 0.7em;">Haz clic aquí para entrar al chat privado</small>
+        </a>
+
         <div class="features">
             <h3 id="feat-title">¿Por qué elegirnos?</h3>
             <ul id="feat-list">
-                <li>Miles de películas y series</li>
-                <li>Fútbol en vivo 24/7</li>
-                <li>Sin anuncios molestos</li>
-                <li>Descarga y mira offline</li>
-                <li>Compatible con Android</li>
-                <li>Soporte técnico 24/7</li>
+                <li>Miles de películas y series en HD</li>
+                <li>Todo el Fútbol en vivo 24/7</li>
+                <li>Sin anuncios en la reproducción</li>
+                <li>Compatible con todos los Android</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // Diccionario de idiomas
+        // Lógica de traducción para Polonia (se mantiene igual)
         const translations = {
-            en: {
-                subTitle: "Movies, Series and Football <strong>FREE</strong>",
-                description: "Download our app and enjoy thousands of contents without ads and in high quality.",
-                btnText: "⬇️ DOWNLOAD APK NOW",
-                featTitle: "Why choose us?",
-                featList: ["Thousands of movies and series", "Live Football 24/7", "No annoying ads", "Download and watch offline", "Android Compatible", "24/7 Technical Support"]
-            },
             pl: {
-                subTitle: "Filmy, Seriale i Piłka Nożna <strong>ZA DARMO</strong>",
-                description: "Pobierz naszą aplikację i ciesz się tysiącami treści bez reklam w wysokiej jakości.",
                 btnText: "⬇️ POBIERZ APK TERAZ",
                 featTitle: "Dlaczego warto nas wybrać?",
-                featList: ["Tysiące filmów i seriali", "Piłka nożna na żywo 24/7", "Brak uciążliwych reklam", "Pobieraj i oglądaj offline", "Kompatybilność z Androidem", "Pomoc techniczna 24/7"]
+                featList: ["Tysiące filmów i seriali", "Piłka nożna na żywo 24/7", "Brak uciążliwych reklam", "Kompatybilność z Androidem"]
             }
         };
 
         function applyTranslation(lang) {
-            // Solo aplica si el idioma existe en nuestro diccionario (Inglés o Polaco)
             if (translations[lang]) {
                 const t = translations[lang];
-                document.getElementById('sub-title').innerHTML = t.subTitle;
-                document.getElementById('description').innerText = t.description;
                 document.getElementById('btn-text').innerText = t.btnText;
                 document.getElementById('feat-title').innerText = t.featTitle;
                 const listItems = document.querySelectorAll('#feat-list li');
@@ -125,25 +163,16 @@
         }
 
         async function detectAndTranslate() {
-            // 1. Prioridad: ¿El navegador está en Polaco?
             const browserLang = navigator.language.split('-')[0];
-            
             if (browserLang === 'pl') {
                 applyTranslation('pl');
-                return; // Si es polaco, paramos aquí.
+                return;
             }
-
-            // 2. Si no es polaco por navegador, revisamos la IP (solo para Polonia)
             try {
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
-                if (data.country_code === 'PL') {
-                    applyTranslation('pl');
-                }
-                // Si la IP no es de Polonia, NO hacemos nada y se queda en ESPAÑOL.
-            } catch (e) {
-                console.log("Error de conexión, se mantiene el idioma base.");
-            }
+                if (data.country_code === 'PL') { applyTranslation('pl'); }
+            } catch (e) { console.log("Geo-IP error"); }
         }
 
         window.onload = detectAndTranslate;
