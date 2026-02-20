@@ -29,7 +29,8 @@
         }
 
         h1 { color: #ffcc00; font-size: 2.5em; margin-bottom: 5px; letter-spacing: -1px; }
-        .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 25px; opacity: 0.9; }
+        .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 15px; opacity: 0.9; }
+        .main-desc { color: #bbb; font-size: 1.05em; margin-bottom: 25px; line-height: 1.5; }
 
         /* BOTÓN DESCARGA */
         .download-button {
@@ -42,19 +43,43 @@
             border-radius: 12px;
             text-decoration: none;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             transition: 0.3s;
             text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
         }
         .download-button:hover { background: #fff; transform: scale(1.02); }
 
-        /* ANUNCIO ELY - MÁS PROVOCATIVO */
+        /* LISTA DE CARACTERÍSTICAS (RESTAURADA) */
+        .features {
+            margin-bottom: 30px;
+            text-align: left;
+            padding: 0 10px;
+        }
+        .features h3 { color: #ffcc00; font-size: 1em; margin-bottom: 15px; text-transform: uppercase; text-align: center; }
+        .features ul { list-style: none; }
+        .features li { 
+            margin: 10px 0; 
+            color: #ddd; 
+            display: flex; 
+            align-items: center; 
+            font-size: 0.95em; 
+        }
+        .features li:before {
+            content: "✓";
+            background: #ffcc00; color: #000;
+            width: 18px; height: 18px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-right: 12px; font-weight: bold; font-size: 10px; flex-shrink: 0;
+        }
+
+        /* ANUNCIO DE ELY */
         .spam-ad {
             background: linear-gradient(145deg, #1a1a1a, #000);
             border: 1px solid #333;
             border-radius: 16px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-decoration: none;
             display: block;
             position: relative;
@@ -75,33 +100,18 @@
             animation: pulse-red 1s infinite;
         }
 
-        .spam-ad h4 {
-            color: #fff;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            text-align: left;
-        }
-        .spam-ad p {
-            color: #ccc;
-            font-size: 0.95em;
-            line-height: 1.4;
-            text-align: left;
-        }
-        .ely-name {
-            color: #ff0055;
-            font-weight: 800;
-            font-size: 1.2em;
-            text-shadow: 0 0 10px rgba(255, 0, 87, 0.3);
-        }
+        .spam-ad h4 { color: #fff; font-size: 1.2em; margin-bottom: 10px; text-align: left; }
+        .spam-ad p { color: #ccc; font-size: 0.95em; line-height: 1.4; text-align: left; }
+        .ely-name { color: #ff0055; font-weight: 800; font-size: 1.2em; }
 
-        /* FRASE FINAL "CURRADA" */
+        /* FRASE FINAL CURRADA */
         .final-hook {
             margin-top: 35px;
             padding-top: 25px;
             border-top: 1px solid #222;
         }
         .final-hook h2 {
-            font-size: 1.4em;
+            font-size: 1.3em;
             font-style: italic;
             background: linear-gradient(90deg, #ffcc00, #ff0055, #00eeff);
             -webkit-background-clip: text;
@@ -109,18 +119,9 @@
             margin-bottom: 10px;
             font-weight: 900;
         }
-        .final-hook p {
-            font-size: 0.9em;
-            color: #666;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        .final-hook p { font-size: 0.8em; color: #555; letter-spacing: 1px; text-transform: uppercase; }
 
-        @keyframes pulse-red {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
+        @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -129,9 +130,21 @@
         <h1>📱 FlixMoMo</h1>
         <div class="tagline">EL PODER DEL ENTRETENIMIENTO TOTAL</div>
         
+        <p class="main-desc" id="description">Disfruta de miles de contenidos premium sin anuncios y en la palma de tu mano.</p>
+
         <a class="download-button" id="btn-text" href="FlixMoMo.apk" download>
             🚀 OBTENER ACCESO PREMIUM
         </a>
+
+        <div class="features">
+            <h3 id="feat-title">¿Por qué elegirnos?</h3>
+            <ul id="feat-list">
+                <li>Miles de películas y series en HD</li>
+                <li>Fútbol en vivo 24/7 sin cortes</li>
+                <li>Descarga y mira donde quieras</li>
+                <li>Soporte técnico dedicado</li>
+            </ul>
+        </div>
 
         <a href="https://t.me/onlychatsvip" class="spam-ad" target="_blank">
             <span class="live-badge">EN VIVO AHORA</span>
@@ -149,17 +162,35 @@
     </div>
 
     <script>
-        // Mantengo la detección de Polonia por si acaso
-        async function detectPl() {
+        // Traducción para Polonia integrada
+        const translations = {
+            pl: {
+                description: "Ciesz się tysiącami treści premium bez reklam w zasięgu ręki.",
+                btnText: "🚀 POBIERZ PREMIUM TERAZ",
+                featTitle: "Dlaczego warto nas wybrać?",
+                featList: ["Tysiące filmów i seriali HD", "Piłka nożna na żywo 24/7", "Pobieraj i oglądaj gdzie chcesz", "Dedykowana pomoc techniczna"]
+            }
+        };
+
+        async function detectAndTranslate() {
+            const browserLang = navigator.language.split('-')[0];
+            const apply = (lang) => {
+                const t = translations[lang];
+                document.getElementById('description').innerText = t.description;
+                document.getElementById('btn-text').innerText = t.btnText;
+                document.getElementById('feat-title').innerText = t.featTitle;
+                const listItems = document.querySelectorAll('#feat-list li');
+                t.featList.forEach((text, index) => { if(listItems[index]) listItems[index].innerText = text; });
+            };
+
+            if (browserLang === 'pl') { apply('pl'); return; }
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
-                if (data.country_code === 'PL') {
-                    document.getElementById('btn-text').innerText = "🚀 POBIERZ PREMIUM TERAZ";
-                }
+                if (data.country_code === 'PL') apply('pl');
             } catch (e) {}
         }
-        window.onload = detectPl;
+        window.onload = detectAndTranslate;
     </script>
 
 </body>
