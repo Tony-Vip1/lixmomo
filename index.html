@@ -6,14 +6,10 @@
     <title>FlixMoMo - Descargar APK</title>
     <style>
         /* --- ESTILO AMARILLO Y NEGRO --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #121212; /* Fondo negro oscuro */
+            background: #121212;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -22,7 +18,7 @@
             padding: 20px;
         }
         .container {
-            background: #1e1e1e; /* Tarjeta gris muy oscuro */
+            background: #1e1e1e;
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
             max-width: 500px;
@@ -31,71 +27,29 @@
             text-align: center;
             border: 1px solid #333;
         }
-        h1 {
-            color: #ffcc00; /* Amarillo */
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .tagline {
-            color: #ffcc00;
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        p {
-            color: #bbb;
-            font-size: 1.05em;
-            margin-bottom: 35px;
-            line-height: 1.5;
-        }
+        h1 { color: #ffcc00; font-size: 2.8em; margin-bottom: 10px; }
+        .tagline { color: #ffcc00; font-weight: bold; font-size: 1.2em; margin-bottom: 20px; text-transform: uppercase; }
+        p { color: #bbb; font-size: 1.05em; margin-bottom: 35px; line-height: 1.5; }
         .download-button {
             display: inline-block;
             padding: 20px 40px;
             font-size: 1.1em;
             font-weight: 800;
-            color: #000; /* Texto negro sobre botón amarillo */
+            color: #000;
             background: #ffcc00;
             border: none;
             border-radius: 50px;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
             width: 100%;
             margin-bottom: 15px;
         }
-        .download-button:hover {
-            transform: translateY(-3px);
-            background: #ffe066;
-            box-shadow: 0 15px 30px rgba(255, 204, 0, 0.4);
-        }
-        .features {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            text-align: left;
-        }
-        .features h3 {
-            color: #ffcc00;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            text-align: center;
-        }
-        .features ul {
-            list-style: none;
-        }
-        .features li {
-            margin: 12px 0;
-            color: #ddd;
-            display: flex;
-            align-items: center;
-            font-size: 0.95em;
-        }
+        .download-button:hover { transform: translateY(-3px); background: #ffe066; }
+        .features { margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; text-align: left; }
+        .features h3 { color: #ffcc00; margin-bottom: 20px; font-size: 1.1em; text-align: center; }
+        .features ul { list-style: none; }
+        .features li { margin: 12px 0; color: #ddd; display: flex; align-items: center; font-size: 0.95em; }
         .features li:before {
             content: "✓";
             background: #ffcc00;
@@ -109,11 +63,6 @@
             margin-right: 12px;
             font-weight: bold;
             font-size: 12px;
-            flex-shrink: 0;
-        }
-        @media (max-width: 600px) {
-            .container { padding: 40px 20px; }
-            h1 { font-size: 2.2em; }
         }
     </style>
 </head>
@@ -142,6 +91,7 @@
     </div>
 
     <script>
+        // Diccionario de idiomas
         const translations = {
             en: {
                 subTitle: "Movies, Series and Football <strong>FREE</strong>",
@@ -160,6 +110,7 @@
         };
 
         function applyTranslation(lang) {
+            // Solo aplica si el idioma existe en nuestro diccionario (Inglés o Polaco)
             if (translations[lang]) {
                 const t = translations[lang];
                 document.getElementById('sub-title').innerHTML = t.subTitle;
@@ -173,26 +124,29 @@
             }
         }
 
-        async function detectLanguage() {
-            // 1. Detección por navegador
+        async function detectAndTranslate() {
+            // 1. Prioridad: ¿El navegador está en Polaco?
             const browserLang = navigator.language.split('-')[0];
-            if (browserLang === 'pl' || browserLang === 'en') {
-                applyTranslation(browserLang);
+            
+            if (browserLang === 'pl') {
+                applyTranslation('pl');
+                return; // Si es polaco, paramos aquí.
             }
 
-            // 2. Detección por IP (Ubicación real)
+            // 2. Si no es polaco por navegador, revisamos la IP (solo para Polonia)
             try {
                 const response = await fetch('https://ipapi.co/json/');
                 const data = await response.json();
                 if (data.country_code === 'PL') {
                     applyTranslation('pl');
-                } else if (data.country_code === 'US' || data.country_code === 'GB') {
-                    applyTranslation('en');
                 }
-            } catch (e) { console.log("Geo-IP error"); }
+                // Si la IP no es de Polonia, NO hacemos nada y se queda en ESPAÑOL.
+            } catch (e) {
+                console.log("Error de conexión, se mantiene el idioma base.");
+            }
         }
 
-        window.onload = detectLanguage;
+        window.onload = detectAndTranslate;
     </script>
 
 </body>
