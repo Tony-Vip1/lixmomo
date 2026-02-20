@@ -32,10 +32,13 @@
         .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 15px; opacity: 0.9; }
         .main-desc { color: #bbb; font-size: 1.05em; margin-bottom: 25px; line-height: 1.5; }
 
-        /* BOTÓN DESCARGA */
+        /* BOTÓN DESCARGA CON RELOJ */
         .download-button {
-            display: inline-block;
-            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
             font-size: 1.1em;
             font-weight: 800;
             color: #000;
@@ -46,11 +49,21 @@
             margin-bottom: 30px;
             transition: 0.3s;
             text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
         }
         .download-button:hover { background: #fff; transform: scale(1.02); }
+        
+        .timer-box {
+            font-size: 0.85em;
+            background: rgba(0,0,0,0.1);
+            padding: 2px 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            color: #d40000; /* Rojo para el reloj */
+            font-family: monospace;
+        }
 
-        /* LISTA DE CARACTERÍSTICAS (RESTAURADA) */
+        /* LISTA DE CARACTERÍSTICAS */
         .features {
             margin-bottom: 30px;
             text-align: left;
@@ -132,8 +145,9 @@
         
         <p class="main-desc" id="description">Disfruta de miles de contenidos premium sin anuncios y en la palma de tu mano.</p>
 
-        <a class="download-button" id="btn-text" href="FlixMoMo.apk" download>
-            🚀 OBTENER ACCESO PREMIUM
+        <a class="download-button" id="btn-container" href="FlixMoMo.apk" download>
+            <span id="btn-text">🚀 OBTENER PREMIUM GRATUITO</span>
+            <div class="timer-box">EXPIRA EN: <span id="countdown">03:30</span></div>
         </a>
 
         <div class="features">
@@ -162,35 +176,61 @@
     </div>
 
     <script>
-        // Traducción para Polonia integrada
+        // Lógica de la Cuenta Atrás Aleatoria
+        function startTimer() {
+            // Tiempo aleatorio entre 3m 15s y 4m 00s para que parezca real
+            let time = Math.floor(Math.random() * (240 - 195 + 1) + 195); 
+            const display = document.querySelector('#countdown');
+            
+            const timer = setInterval(function () {
+                let minutes = parseInt(time / 60, 10);
+                let seconds = parseInt(time % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--time < 0) {
+                    time = 210; // Reinicia si llega a cero para que siempre haya urgencia
+                }
+            }, 1000);
+        }
+
+        // Traducción para Polonia (Mantenida)
         const translations = {
             pl: {
-                description: "Ciesz się tysiącami treści premium bez reklam w zasięgu ręki.",
-                btnText: "🚀 POBIERZ PREMIUM TERAZ",
-                featTitle: "Dlaczego warto nas wybrać?",
-                featList: ["Tysiące filmów i seriali HD", "Piłka nożna na żywo 24/7", "Pobieraj i oglądaj gdzie chcesz", "Dedykowana pomoc techniczna"]
+                description: "Ciesz się treściami premium bez reklam.",
+                btnText: "🚀 ODBIERZ DARMOWE PREMIUM",
+                featTitle: "Dlaczego my?",
+                featList: ["Filmy i seriale HD", "Piłka nożna 24/7", "Pobieraj i oglądaj", "Pomoc techniczna"]
             }
         };
 
-        async function detectAndTranslate() {
+        async function init() {
+            startTimer(); // Iniciar reloj
+
             const browserLang = navigator.language.split('-')[0];
-            const apply = (lang) => {
-                const t = translations[lang];
+            if (browserLang === 'pl') {
+                const t = translations.pl;
                 document.getElementById('description').innerText = t.description;
                 document.getElementById('btn-text').innerText = t.btnText;
                 document.getElementById('feat-title').innerText = t.featTitle;
                 const listItems = document.querySelectorAll('#feat-list li');
                 t.featList.forEach((text, index) => { if(listItems[index]) listItems[index].innerText = text; });
-            };
-
-            if (browserLang === 'pl') { apply('pl'); return; }
+            }
+            
+            // Verificación por IP para Polonia
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
-                if (data.country_code === 'PL') apply('pl');
+                if (data.country_code === 'PL' && browserLang !== 'pl') {
+                    document.getElementById('btn-text').innerText = "🚀 ODBIERZ DARMOWE PREMIUM";
+                }
             } catch (e) {}
         }
-        window.onload = detectAndTranslate;
+
+        window.onload = init;
     </script>
 
 </body>
