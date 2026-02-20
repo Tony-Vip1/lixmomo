@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlixMoMo - Descargar APK</title>
     <style>
+        /* --- ESTILOS VISUALES --- */
         * {
             margin: 0;
             padding: 0;
@@ -76,6 +77,10 @@
         }
         .features li {
             margin: 10px 0;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .features li:before {
             content: "✓ ";
@@ -84,29 +89,26 @@
             margin-right: 8px;
         }
         @media (max-width: 600px) {
-            .container {
-                padding: 40px 25px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .download-button {
-                width: 100%;
-            }
+            .container { padding: 40px 25px; }
+            h1 { font-size: 2em; }
+            .download-button { width: 100%; }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h1>📱 FlixMoMo</h1>
-        <p>Películas, Series y Fútbol <strong>GRATIS</strong></p>
-        <p>Descarga nuestra app y disfruta de miles de contenidos sin anuncios.</p>
-        <a class="download-button" href="FlixMoMo.apk" download>
+        <h1 id="main-title">📱 FlixMoMo</h1>
+        <p id="sub-title">Películas, Series y Fútbol <strong>GRATIS</strong></p>
+        <p id="description">Descarga nuestra app y disfruta de miles de contenidos sin anuncios.</p>
+        
+        <a class="download-button" id="btn-text" href="FlixMoMo.apk" download>
             ⬇️ Descargar APK Ahora
         </a>
+
         <div class="features">
-            <h3>¿Por qué elegirnos?</h3>
-            <ul>
+            <h3 id="feat-title">¿Por qué elegirnos?</h3>
+            <ul id="feat-list">
                 <li>Miles de películas y series</li>
                 <li>Fútbol en vivo 24/7</li>
                 <li>Sin anuncios molestos</li>
@@ -116,5 +118,65 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        // --- DICCIONARIO DE TRADUCCIONES ---
+        const translations = {
+            en: {
+                subTitle: "Movies, Series and Football <strong>FREE</strong>",
+                description: "Download our app and enjoy thousands of contents without ads.",
+                btnText: "⬇️ Download APK Now",
+                featTitle: "Why choose us?",
+                featList: [
+                    "Thousands of movies and series",
+                    "Live Football 24/7",
+                    "No annoying ads",
+                    "Download and watch offline",
+                    "Android Compatible",
+                    "24/7 Technical Support"
+                ]
+            },
+            pl: {
+                subTitle: "Filmy, Seriale i Piłka Nożna <strong>ZA DARMO</strong>",
+                description: "Pobierz naszą aplikację i ciesz się tysiącami treści bez reklam.",
+                btnText: "⬇️ Pobierz APK Teraz",
+                featTitle: "Dlaczego warto nas wybrać?",
+                featList: [
+                    "Tysiące filmów i seriali",
+                    "Piłka nożna na żywo 24/7",
+                    "Brak uciążliwych reklam",
+                    "Pobieraj i oglądaj offline",
+                    "Kompatybilność z Androidem",
+                    "Pomoc techniczna 24/7"
+                ]
+            }
+        };
+
+        // --- LÓGICA DE DETECCIÓN ---
+        function applyTranslation() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const langCode = userLang.split('-')[0]; // Detecta 'en', 'es', 'pl', etc.
+
+            if (translations[langCode]) {
+                const t = translations[langCode];
+                
+                // Cambiar textos simples
+                document.getElementById('sub-title').innerHTML = t.subTitle;
+                document.getElementById('description').innerText = t.description;
+                document.getElementById('btn-text').innerText = t.btnText;
+                document.getElementById('feat-title').innerText = t.featTitle;
+                
+                // Cambiar lista de beneficios
+                const listItems = document.querySelectorAll('#feat-list li');
+                t.featList.forEach((text, index) => {
+                    if(listItems[index]) listItems[index].innerText = text;
+                });
+            }
+        }
+
+        // Ejecutar al cargar la página
+        window.onload = applyTranslation;
+    </script>
+
 </body>
 </html>
