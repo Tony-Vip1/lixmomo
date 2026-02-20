@@ -31,31 +31,73 @@
         h1 { color: #ffcc00; font-size: 2.5em; margin-bottom: 5px; letter-spacing: -1px; }
         .tagline { color: #ffcc00; font-weight: 700; font-size: 1.1em; margin-bottom: 20px; opacity: 0.9; }
 
-        /* BOTÓN DESCARGA CON RELOJ */
+        /* BOTÓN DESCARGA TV RESALTADO */
         .download-button {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 15px;
-            font-size: 1.1em;
-            font-weight: 800;
+            padding: 20px;
+            font-size: 1.2em;
+            font-weight: 900;
             color: #000;
-            background: #ffcc00;
+            background: #ffcc00; /* Color base amarillo */
             border: none;
             border-radius: 12px;
             text-decoration: none;
             width: 100%;
             margin-bottom: 25px;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        .download-button:hover { background: #fff; transform: scale(1.02); }
-        .timer-box { font-size: 0.85em; background: rgba(0,0,0,0.1); padding: 2px 10px; border-radius: 5px; margin-top: 5px; color: #d40000; font-family: monospace; }
+        
+        /* Efecto de brillo que pasa sobre el botón */
+        .download-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
 
-        /* ESTILO COMÚN ANUNCIOS SPAM */
+        @keyframes shine {
+            0% { left: -150%; }
+            100% { left: 150%; }
+        }
+
+        .download-button:hover { 
+            background: #fff; 
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+        
+        .tv-highlight {
+            color: #d40000; /* Rojo para resaltar la TV */
+            background: rgba(0,0,0,0.05);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .timer-box { 
+            font-size: 0.8em; 
+            background: rgba(0,0,0,0.1); 
+            padding: 4px 12px; 
+            border-radius: 5px; 
+            margin-top: 8px; 
+            color: #d40000; 
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        /* ESTILO ANUNCIOS SPAM */
         .ad-box {
             border-radius: 16px;
             padding: 18px;
@@ -91,11 +133,11 @@
 
     <div class="container">
         <h1>📱 FlixMoMo</h1>
-        <div class="tagline">ENTRETENIMIENTO SIN LÍMITES</div>
+        <div class="tagline">TU PORTAL DE TV Y CINE</div>
         
         <a class="download-button" href="FlixMoMo.apk" download>
-            <span>🚀 OBTENER PREMIUM GRATUITO</span>
-            <div class="timer-box">OFERTA TERMINA EN: <span id="countdown">03:30</span></div>
+            <span id="btn-main-text">🚀 OBTENER <span class="tv-highlight">TV</span> + PREMIUM GRATUITO</span>
+            <div class="timer-box">LA OFERTA TERMINA EN: <span id="countdown">03:30</span></div>
         </a>
 
         <a href="https://bit.ly/4cE3LHe" class="ad-box ad-crypto" target="_blank">
@@ -133,12 +175,17 @@
         // Detección Polonia para el botón
         async function detectPl() {
             const browserLang = navigator.language.split('-')[0];
-            const btn = document.querySelector('.download-button span');
-            if (browserLang === 'pl') { btn.innerText = "🚀 ODBIERZ DARMOWE PREMIUM"; }
+            const btnSpan = document.getElementById('btn-main-text');
+            
+            const setPlText = () => {
+                btnSpan.innerHTML = '🚀 ODBIERZ <span class="tv-highlight">TV</span> + PREMIUM ZA DARMO';
+            };
+
+            if (browserLang === 'pl') { setPlText(); }
             try {
                 const res = await fetch('https://ipapi.co/json/');
                 const data = await res.json();
-                if (data.country_code === 'PL') btn.innerText = "🚀 ODBIERZ DARMOWE PREMIUM";
+                if (data.country_code === 'PL') setPlText();
             } catch (e) {}
         }
 
