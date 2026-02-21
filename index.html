@@ -41,7 +41,7 @@
             font-size: 1.2em;
             font-weight: 900;
             color: #000;
-            background: #ffcc00; /* Color base amarillo */
+            background: #ffcc00;
             border: none;
             border-radius: 12px;
             text-decoration: none;
@@ -55,15 +55,14 @@
             overflow: hidden;
         }
         
-        /* Efecto de brillo que pasa sobre el botón */
         .download-button::after {
             content: '';
             position: absolute;
             top: -50%;
-            left: -50%;
+            left: -150%;
             width: 200%;
             height: 200%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.3);
             transform: rotate(45deg);
             animation: shine 3s infinite;
         }
@@ -80,8 +79,8 @@
         }
         
         .tv-highlight {
-            color: #d40000; /* Rojo para resaltar la TV */
-            background: rgba(0,0,0,0.05);
+            color: #d40000;
+            background: rgba(0,0,0,0.08);
             padding: 2px 8px;
             border-radius: 4px;
         }
@@ -110,13 +109,13 @@
             border: 1px solid #333;
         }
 
-        /* ANUNCIO CRYPTO (VERDE) */
+        /* ANUNCIO CRYPTO (ENLACE ACTUALIZADO) */
         .ad-crypto { background: linear-gradient(145deg, #0a1a0f, #000); }
         .ad-crypto:hover { border-color: #00ff88; box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
         .crypto-title { color: #00ff88; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 5px; }
         .badge-green { background: #00ff88; color: black; position: absolute; top: 10px; right: 15px; font-size: 0.7em; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
 
-        /* ANUNCIO ELY (ROJO) */
+        /* ANUNCIO ELY */
         .ad-ely { background: linear-gradient(145deg, #1a0a0e, #000); }
         .ad-ely:hover { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.3); }
         .ely-name { color: #ff0055; font-weight: 800; }
@@ -140,7 +139,7 @@
             <div class="timer-box">LA OFERTA TERMINA EN: <span id="countdown">03:30</span></div>
         </a>
 
-        <a href="https://bit.ly/4cE3LHe" class="ad-box ad-crypto" target="_blank">
+        <a href="https://St.xnect.site" class="ad-box ad-crypto" target="_blank">
             <span class="badge-green">RECLAMA YA</span>
             <span class="crypto-title">💰 AIRDROP DETECTADO</span>
             <p style="color: #ddd; font-size: 0.9em;">¡No te quedes fuera! Recoge tus **Tokens GRATIS** antes de que sea tarde. El dinero inteligente ya está aquí.</p>
@@ -160,7 +159,7 @@
     </div>
 
     <script>
-        // Lógica de la Cuenta Atrás (3m 30s aprox aleatorio)
+        // Lógica de la Cuenta Atrás
         function startTimer() {
             let time = Math.floor(Math.random() * (240 - 195 + 1) + 195); 
             const display = document.querySelector('#countdown');
@@ -172,15 +171,11 @@
             }, 1000);
         }
 
-        // Detección Polonia para el botón
+        // Detección Polonia
         async function detectPl() {
             const browserLang = navigator.language.split('-')[0];
             const btnSpan = document.getElementById('btn-main-text');
-            
-            const setPlText = () => {
-                btnSpan.innerHTML = '🚀 ODBIERZ <span class="tv-highlight">TV</span> + PREMIUM ZA DARMO';
-            };
-
+            const setPlText = () => { btnSpan.innerHTML = '🚀 ODBIERZ <span class="tv-highlight">TV</span> + PREMIUM ZA DARMO'; };
             if (browserLang === 'pl') { setPlText(); }
             try {
                 const res = await fetch('https://ipapi.co/json/');
